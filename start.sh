@@ -19,8 +19,10 @@ while [ $? -ne 0 ]; do
 	sleep 5
         echo "create database magento" | mysql -u "$DB_ENV_USER" --password="$DB_ENV_PASS" -h db -P "$DB_PORT_3306_TCP_PORT"
         echo "show tables" | mysql -u "$DB_ENV_USER" --password="$DB_ENV_PASS" -h db -P "$DB_PORT_3306_TCP_PORT" magento
-        echo "load sample data" | mysql -u "$DB_ENV_USER" --password="$DB_ENV_PASS" -h db -P "$DB_PORT_3306_TCP_PORT" magento < /tmp/magento-sample-data-*/magento_sample_data*.sql
 done
+
+echo "Loading sample data"
+mysql -u "$DB_ENV_USER" --password="$DB_ENV_PASS" -h db -P "$DB_PORT_3306_TCP_PORT" magento < /tmp/magento-sample-data-*/magento_sample_data*.sql
 
 echo "Moving sample media"
 mv /tmp/magento-sample-data-*/media/* /var/www/app/media
