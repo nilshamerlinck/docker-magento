@@ -22,13 +22,17 @@ RUN chkconfig nginx on
 
 #install magento files 
 
-RUN cd /tmp && wget http://www.magentocommerce.com/downloads/assets/1.9.0.1/magento-1.9.0.1.tar.gz
+RUN cd /tmp && wget http://www.magentocommerce.com/downloads/assets/1.7.0.2/magento-1.7.0.2.tar.gz
 
-RUN cd /tmp && tar -zxvf magento-1.9.0.1.tar.gz
+RUN cd /tmp && tar -zxvf magento-1.7.0.2.tar.gz
 
 RUN mv /tmp/magento /var/www
 
 RUN cd /var/www/ && chmod -R o+w media var && chmod o+w app/etc && rm -f magento-*tar.gz
+
+RUN cd /tmp && wget http://www.magentocommerce.com/downloads/assets/1.6.1.0/magento-sample-data-1.6.1.0.tar.gz
+
+RUN cd /tmp && tar -zxvf magento-sample-data-1.6.1.0.tar.gz
 
 ADD mage-cache.xml /var/www/app/etc/mage-cache.xml
 
