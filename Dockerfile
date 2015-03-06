@@ -12,7 +12,7 @@ RUN rpm -Uvh   http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-
 
 RUN yum -y install which openssh-server php-mysql php-gd php-mcrypt php-zip php-xml php-iconv php-curl php-soap php-simplexml php-pdo php-dom php-cli php-fpm nginx
 
-RUN yum -y install tar mysql
+RUN yum -y install tar mysql bzr
 
 ADD default.conf /etc/nginx/conf.d/default.conf
  
@@ -33,6 +33,8 @@ RUN cd /var/www/ && chmod -R o+w media var && chmod o+w app/etc && rm -f magento
 RUN cd /tmp && wget http://www.magentocommerce.com/downloads/assets/1.6.1.0/magento-sample-data-1.6.1.0.tar.gz
 
 RUN cd /tmp && tar -zxvf magento-sample-data-1.6.1.0.tar.gz
+
+RUN cd /tmp && bzr checkout --lightweight http://bazaar.launchpad.net/~magentoerpconnect-core-editors/magentoerpconnect/module-magento-trunk/
 
 ADD mage-cache.xml /var/www/app/etc/mage-cache.xml
 
