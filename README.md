@@ -30,7 +30,7 @@ Build the image and run it
 git clone https://github.com/guewen/docker-magento.git .
 cd docker-magento
 docker build -t docker-magento .
-docker run -p 80:80 -link mariadb:db --link memcached:cache -td docker-magento 
+docker run -p 80:80 --link mariadb:db --link memcached:cache -td docker-magento 
 ```
 
 The installation takes somes times as it needs to load the sample database.
