@@ -31,7 +31,7 @@ RUN cd /usr/lib64/python2.6/site-packages && patch -p0 -N < /tmp/bzr_patch.txt
 
 #install magento files 
 
-RUN cd /tmp && wget http://www.magentocommerce.com/downloads/assets/1.7.0.2/magento-1.7.0.2.tar.gz
+RUN cd /tmp && wget http://pubfiles.nexcess.net/magento/ce-packages/magento-1.7.0.2.tar.gz
 
 RUN cd /tmp && tar -zxvf magento-1.7.0.2.tar.gz
 
@@ -39,7 +39,7 @@ RUN mv /tmp/magento /var/www
 
 RUN cd /var/www/ && chmod -R o+w media var && chmod o+w app/etc && rm -f magento-*tar.gz
 
-RUN cd /tmp && wget http://www.magentocommerce.com/downloads/assets/1.6.1.0/magento-sample-data-1.6.1.0.tar.gz
+RUN cd /tmp && wget http://mirror.gunah.eu/magento/sample-data/magento-sample-data-1.6.1.0.tar.gz
 
 RUN cd /tmp && tar -zxvf magento-sample-data-1.6.1.0.tar.gz
 
