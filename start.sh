@@ -9,6 +9,10 @@ done
 
 echo -e "\nmysql ready"
 
+chown -R apache:apache /var/www/var
+chown -R apache:apache /var/www/media
+chown -R apache:apache /var/www/app/etc
+
 mkdir -p /firstrun
 if [[ -e /firstrun/ok ]]; then
 
@@ -42,6 +46,7 @@ echo "Moving Magento Connector module"
 mv /tmp/module-magento-trunk/Openlabs_OpenERPConnector-1.1.0/app/etc/modules/Openlabs_OpenERPConnector.xml /var/www/app/etc/modules/
 mv /tmp/module-magento-trunk/Openlabs_OpenERPConnector-1.1.0/Openlabs /var/www/app/code/community/
 rm -rf /tmp/module-magento-trunk
+
 
 echo "Adding Magento Caching"
 
