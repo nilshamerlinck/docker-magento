@@ -1,6 +1,16 @@
 #! /bin/bash
 
-if [[ -e /firstrun ]]; then
+echo "Waiting for mysql"
+until mysql -h"db" -P"$DB_PORT_3306_TCP_PORT" -u"$DB_ENV_USER" -p"$DB_ENV_PASS" &> /dev/null
+do
+  printf "."
+  sleep 1
+done
+
+echo -e "\nmysql ready"
+
+mkdir -p /firstrun
+if [[ -e /firstrun/ok ]]; then
 
 echo "not first run so skipping initialization"
 
@@ -25,7 +35,8 @@ echo "Loading sample data"
 mysql -u "$DB_ENV_USER" --password="$DB_ENV_PASS" -h db -P "$DB_PORT_3306_TCP_PORT" magento < /tmp/magento-sample-data-*/magento_sample_data*.sql
 
 echo "Moving sample media"
-mv /tmp/magento-sample-data-*/media/* /var/www/app/media
+cp -R /tmp/magento-sample-data-1.9.1.0/media/* /var/www/media/
+cp -R /tmp/magento-sample-data-1.9.1.0/skin/* /var/www/skin/
 
 echo "Moving Magento Connector module"
 mv /tmp/module-magento-trunk/Openlabs_OpenERPConnector-1.1.0/app/etc/modules/Openlabs_OpenERPConnector.xml /var/www/app/etc/modules/
@@ -47,7 +58,7 @@ php -f /var/www/install.php -- \
 --db_name "magento" \
 --db_user "$DB_ENV_USER" \
 --db_pass "$DB_ENV_PASS" \
---url "http://127.0.0.1/" \
+--url "http://127.0.0.1:8080/" \
 --skip_url_validation \
 --use_rewrites no \
 --use_secure no \
@@ -59,7 +70,7 @@ php -f /var/www/install.php -- \
 --admin_username "admin" \
 --admin_password "admin25"
 
-touch /firstrun
+touch /firstrun/ok
 
 fi
 
