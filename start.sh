@@ -12,6 +12,8 @@ echo -e "\nmysql ready"
 chown -R apache:apache /var/www/var
 chown -R apache:apache /var/www/media
 chown -R apache:apache /var/www/app/etc
+# ugly quickfix (it's for dev anyway)
+chmod 777 /tmp
 
 mkdir -p /firstrun
 if [[ -e /firstrun/ok ]]; then
