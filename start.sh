@@ -65,7 +65,7 @@ php -f /var/www/install.php -- \
 --db_name "magento" \
 --db_user "$DB_ENV_USER" \
 --db_pass "$DB_ENV_PASS" \
---url "http://127.0.0.1:8080/" \
+--url "http://localhost/" \
 --skip_url_validation \
 --use_rewrites no \
 --use_secure no \
@@ -79,6 +79,10 @@ php -f /var/www/install.php -- \
 
 touch /firstrun/ok
 
+fi
+
+if [[ -n "$HTTP_HOST" ]]; then
+  php /var/www/seturl.php
 fi
 
 service php-fpm start
