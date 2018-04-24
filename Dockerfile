@@ -11,7 +11,7 @@ RUN yum -y install wget
 # EPEL has good RPM goodies!
 RUN rpm -Uvh   http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 
-RUN yum -y install which openssh-server php-mysql php-gd php-mcrypt php-zip php-xml php-iconv php-curl php-soap php-simplexml php-pdo php-dom php-cli php-fpm nginx
+RUN yum -y install which openssh-server php-mysql php-gd php-mcrypt php-mbstring php-zip php-xml php-iconv php-curl php-soap php-simplexml php-pdo php-dom php-cli php-fpm nginx
 
 RUN yum -y install tar mysql bzr
 
